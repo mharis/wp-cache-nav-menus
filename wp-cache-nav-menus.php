@@ -55,7 +55,7 @@ add_filter( 'wp_nav_menu', function( $nav, $args ) {
 	$post_id = get_queried_object_id();
 
 	if( $post_id ) {
-		$key = 'menu-cache-' . $args->theme_location;
+		$key = 'menu-cache-' . $args->theme_location . '-' . $post_id;
 		$data = array('time' => time(), 'data' => $nav);
 		set_transient( $key, $data );
 	}
