@@ -56,7 +56,7 @@ add_filter( 'wp_nav_menu', function( $nav, $args ) {
 	$last_updated = get_transient('menu-cache-' . $args->theme_location . '-last-updated');
 
 	if( ! $last_updated ) {
-		set_transient('menu-cache-' . $args['theme_location'] . '-last-updated', time());
+		set_transient('menu-cache-' . $args->theme_location . '-last-updated', time());
 	}
 
 	if( $post_id ) {
