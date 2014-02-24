@@ -32,6 +32,7 @@ add_filter( 'wp_nav_menu_args', function( $args ) {
 		
 		$args = array_merge( $args, array(
 			'fallback_cb' => 'this_pro_function',
+			'theme_location' => 'something-unexpected-for-a-menu-name',
 			'the_cache' => $cache['data']
 		) );
 	}
