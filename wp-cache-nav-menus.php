@@ -65,8 +65,13 @@ add_filter( 'wp_nav_menu', function( $nav, $args ) {
 }, 10, 2 );
 
 
-add_action( 'wp_update_nav_menu', function() {
+add_action( 'wp_update_nav_menu', function($menu_id) {
+	$locations = array_flip(get_nav_menu_locations());
 	
-	set_transient('menu-cache-' . $args['theme_location'] . '-last-updated', time());
+	if( isset($locations[$menu_id]) ) {
 	
-}, 10, 0);
+		set_transient('menu-cache-' . $locations[$menu_id] . '-last-updated', time());
+		
+	}
+	
+}, 10, 1);
