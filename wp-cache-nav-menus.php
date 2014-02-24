@@ -26,7 +26,6 @@ add_filter( 'wp_nav_menu_args', function( $args ) {
 		
 		$last_updated = get_transient('menu-cache-' . $args['theme_location'] . '-last-updated');
 		
-		$cache = get_transient( $key );
 		if ( !isset($cache['time']) || empty($last_updated) || $last_updated > $cache['time'] ) {
 			return $args;
 		}
