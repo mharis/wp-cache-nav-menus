@@ -1,14 +1,13 @@
 <?php
 /**
  * Plugin Name:       WP Cache Nav Menus
- * Plugin URI:        @TODO
+ * Plugin URI:        https://github.com/mharis/wp-cache-nav-menus
  * Description:       Optimize the speed of WordPress Menus
  * Version:           1.0.0
- * Author:            mharis
- * Author URI:        @TODO
+ * Author:            Asad Khan, Muhammad Haris
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * GitHub Plugin URI: https://github.com/<owner>/<repo>
+ * GitHub Plugin URI: https://github.com/mharis/wp-cache-nav-menus
  */
 
 // If this file is called directly, abort.
