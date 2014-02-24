@@ -53,7 +53,7 @@ function this_pro_function( $args ) {
 add_filter( 'wp_nav_menu', function( $nav, $args ) {
 
 	$post_id = get_queried_object_id();
-	$last_updated = get_transient('menu-cache-' . $args['theme_location'] . '-last-updated');
+	$last_updated = get_transient('menu-cache-' . $args->theme_location . '-last-updated');
 
 	if( ! $last_updated ) {
 		set_transient('menu-cache-' . $args['theme_location'] . '-last-updated', time());
