@@ -21,11 +21,19 @@ add_filter( 'wp_nav_menu_args', function( $args ) {
 	$post_id = get_queried_object_id();
 	$key = 'menu-cache-' . $args['theme_location'] . '-' . $post_id;
 	
-	$cache = wp_cache_get( $key );
+	$cache = get_transient( $key );
 	if( $cache ) {
+		
+		$last_updated = get_transient('menu-cache-' . $args['theme_location'] . '-last-updated');
+		
+		$cache = get_transient( $key );
+		if ( !isset($cache['time']) || empty($last_updated) || $last_updated > $cache['time'] ) {
+			return $args;
+		}
+		
 		$args = array_merge( $args, array(
 			'fallback_cb' => 'this_pro_function',
-			'the_cache' => $cache
+			'the_cache' => $cache['data']
 		) );
 	}
 	
@@ -48,10 +56,18 @@ add_filter( 'wp_nav_menu', function( $nav, $args ) {
 	$post_id = get_queried_object_id();
 
 	if( $post_id ) {
-		$key = 'menu-cache-' . $args->theme_location . '-' . $post_id;
-		wp_cache_set( $key, $nav );
+		$key = 'menu-cache-' . $args->theme_location;
+		$data = array('time' => time(), 'data' => $nav);
+		set_transient( $key, $data );
 	}
 	
 	return $nav;
 
 }, 10, 2 );
+
+
+add_action( 'wp_update_nav_menu', function() {
+	
+	set_transient('menu-cache-' . $args['theme_location'] . '-last-updated', time());
+	
+}, 10, 0);
